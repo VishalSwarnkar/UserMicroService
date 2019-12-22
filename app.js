@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const User = require('./Models/userSchema');
 const connectDB = require('./connection');
+const mongoose = require('mongoose');
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 app.get('/', (req, res)=>{
     res.send('Hello world');
@@ -15,6 +16,13 @@ app.listen(PORT, (res)=>{
     connectDB().then(()=>{
         console.log("DB connected")
     })
+
+    mongoose.connection.on('error', (err) => {	
+        app.emit('db.error', err);
+    });
+    mongoose.connection.on('connected', () => {	
+        app.emit('db.ready', mongoose);
+    });
 })
 
 app.get('/users', async(req, res)=>{

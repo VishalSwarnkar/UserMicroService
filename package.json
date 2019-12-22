@@ -5,12 +5,13 @@
   "main": "app.js",
   "scripts": {
     "test": "test",
-    "start": "node app.js"
+    "start": "node node_modules/nodemon/bin/nodemon app.js"
   },
   "author": "vishal",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.8.1"
+    "mongoose": "^5.8.1",
+    "nodemon": "^2.0.2"
   }
 }
